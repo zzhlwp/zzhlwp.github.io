@@ -91,28 +91,6 @@ document.querySelectorAll('.post-card, .hero-content, .featured-posts h2').forEa
     observer.observe(el);
 });
 
-// 导航栏滚动效果
-let lastScroll = 0;
-const header = document.querySelector('header');
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll <= 0) {
-        header.classList.remove('scroll-up');
-        return;
-    }
-    
-    if (currentScroll > lastScroll && !header.classList.contains('scroll-down')) {
-        header.classList.remove('scroll-up');
-        header.classList.add('scroll-down');
-    } else if (currentScroll < lastScroll && header.classList.contains('scroll-down')) {
-        header.classList.remove('scroll-down');
-        header.classList.add('scroll-up');
-    }
-    lastScroll = currentScroll;
-});
-
 // 文字打字机效果
 function typeWriter(element, text, speed = 100) {
     let i = 0;

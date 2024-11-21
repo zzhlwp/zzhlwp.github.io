@@ -1,26 +1,21 @@
 const backgrounds = [
-    // 钢铁侠系列
-    'https://images.unsplash.com/photo-1635863138275-d9b33299680b?w=1920&q=80', // 钢铁侠展览
-    'https://images.unsplash.com/photo-1608889825103-eb5ed706fc64?w=1920&q=80', // 钢铁侠盔甲
+    // 本地图片
+    'images/backgrounds/ironman-1.jpg',    // 钢铁侠图片
+    'images/backgrounds/ironman-2.jpg',    // 钢铁侠图片2
+    'images/backgrounds/spiderman.jpg',    // 蜘蛛侠图片
+    'images/backgrounds/car-1.jpg',        // 跑车图片
     
-    // 漫威英雄系列
-    'https://images.unsplash.com/photo-1556707752-481d500a2c58?w=1920&q=80', // 复仇者联盟
-    'https://images.unsplash.com/photo-1580751647664-5f5fe6bb2c51?w=1920&q=80', // 蜘蛛侠
-    
-    // 科技感场景
-    'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80',
-    'https://images.unsplash.com/photo-1484950763426-56b5bf172dbb?w=1920&q=80',
-    
-    // 高质量人物肖像
-    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1920&q=80',
-    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1920&q=80'
+    // 在线高清图片（备选）
+    'https://images.hdqwalls.com/download/iron-man-4k-2020-ix-3840x2160.jpg',
+    'https://images.hdqwalls.com/download/spiderman-miles-morales-4k-2020-game-3840x2160.jpg',
+    'https://images.hdqwalls.com/download/mclaren-765lt-2020-4k-ru-3840x2160.jpg',
+    'https://images.hdqwalls.com/download/cyberpunk-2077-porsche-911-turbo-4k-u0-3840x2160.jpg'
 ];
 
 function setRandomBackground() {
     const randomIndex = Math.floor(Math.random() * backgrounds.length);
     const selectedBg = backgrounds[randomIndex];
     
-    // 预加载图片
     const img = new Image();
     img.src = selectedBg;
     
@@ -28,20 +23,36 @@ function setRandomBackground() {
         document.body.style.backgroundImage = `url(${selectedBg})`;
         document.body.classList.add('background-fade');
         
-        // 添加加载动画
         setTimeout(() => {
             document.body.classList.remove('background-loading');
         }, 500);
     };
     
+    img.onerror = function() {
+        console.error('图片加载失败:', selectedBg);
+        // 如果在线图片加载失败，尝试使用本地图片
+        const localImages = backgrounds.filter(bg => bg.startsWith('images/'));
+        if (localImages.length > 0) {
+            const randomLocal = localImages[Math.floor(Math.random() * localImages.length)];
+            document.body.style.backgroundImage = `url(${randomLocal})`;
+        }
+    };
+    
     document.body.classList.add('background-loading');
 }
 
-// 页面加载时设置随机背景
+// 预加载所有背景图片
+function preloadImages() {
+    backgrounds.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     setRandomBackground();
+    preloadImages();
     
-    // 点击换背景按钮时更换背景
     const changeButton = document.getElementById('change-bg');
     if (changeButton) {
         changeButton.addEventListener('click', setRandomBackground);

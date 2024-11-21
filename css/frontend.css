@@ -1,0 +1,68 @@
+.frontend-main {
+    padding: 2rem;
+    margin-top: var(--nav-height);
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+}
+
+.frontend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.frontend-section {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.frontend-section h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.frontend-section h2 i {
+    color: var(--secondary-color);
+}
+
+.content-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.content-item {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.content-item:hover {
+    background: var(--secondary-color);
+    color: white;
+    transform: translateX(10px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .frontend-main {
+        padding: 1rem;
+    }
+
+    .frontend-grid {
+        grid-template-columns: 1fr;
+    }
+} 
