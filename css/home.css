@@ -1,0 +1,89 @@
+.home-main {
+    margin-top: var(--nav-height);
+    padding: 2rem;
+    max-width: 1200px;
+    margin: var(--nav-height) auto 0;
+}
+
+.profile-section {
+    margin-bottom: 3rem;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 4px solid var(--secondary-color);
+}
+
+.profile-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.profile-bio {
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.recent-posts {
+    margin-top: 3rem;
+}
+
+.recent-posts h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    position: relative;
+}
+
+.recent-posts h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--secondary-color);
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+} 

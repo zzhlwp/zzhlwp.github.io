@@ -10,63 +10,45 @@
 <body>
     <header>
         <nav>
-            <div class="logo">辉哥之路</div>
+            <div class="logo">
+                <img src="images/logo.png" alt="星星Logo" class="logo-img">
+                辉哥之路
+            </div>
             <ul class="nav-links">
-                <li><a href="index.html">首页</a></li>
-                <li><a href="blog.html">博客</a></li>
-                <li><a href="about.html">关于我</a></li>
+                <li><a href="index.html" class="active">主站</a></li>
+                <li><a href="home.html">主页</a></li>
+                <li><a href="tools.html">工具</a></li>
+                <li><a href="resources.html">资源导航</a></li>
+                <li><a href="skills.html">能力</a></li>
+                <li><a href="algorithm.html">算法</a></li>
+                <li><a href="frontend.html">前端</a></li>
+                <li><a href="backend.html">后端</a></li>
+                <li><a href="guide.html">程序员导航指南</a></li>
             </ul>
+            <div class="nav-right">
+                <a href="#" class="theme-toggle">🌙</a>
+                <a href="https://github.com/" target="_blank" class="github-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="gitee-link"><i class="fab fa-git-alt"></i></a>
+                <a href="#" class="edit-link"><i class="fas fa-edit"></i></a>
+            </div>
         </nav>
     </header>
 
     <main>
         <section class="hero">
-            <div class="particles-background" id="particles-js"></div>
             <div class="hero-content">
-                <h1>Welcome to 辉哥之路</h1>
-                <p>分享技术，记录生活</p>
+                <h1>Driven by dreams, not by profit ✨</h1>
+                <div class="hero-description">
+                    <span class="code-icon">⭐</span>
+                    <p>用代码改变世界</p>
+                </div>
             </div>
         </section>
 
-        <section class="featured-posts">
-            <h2>最新文章</h2>
-            <div class="post-grid">
-                <article class="post-card">
-                    <img src="https://images.unsplash.com/photo-1608889825103-eb5ed706fc64?auto=format&fit=crop&w=800&q=80" alt="技术博客">
-                    <div class="post-content">
-                        <h3>深入理解JavaScript异步编程</h3>
-                        <p>探讨JavaScript中的异步编程模式，包括Promise、async/await的使用...</p>
-                        <a href="#" class="read-more">阅读更多</a>
-                    </div>
-                </article>
-                <article class="post-card">
-                    <img src="https://images.unsplash.com/photo-1580751647664-5f5fe6bb2c51?auto=format&fit=crop&w=800&q=80" alt="学习笔记">
-                    <div class="post-content">
-                        <h3>React Hooks最佳实践</h3>
-                        <p>分享React Hooks的使用技巧和常见陷阱的解决方案...</p>
-                        <a href="#" class="read-more">阅读更多</a>
-                    </div>
-                </article>
-                <article class="post-card">
-                    <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680b?auto=format&fit=crop&w=800&q=80" alt="开发经验">
-                    <div class="post-content">
-                        <h3>Web性能优化指南</h3>
-                        <p>全面的Web应用性能优化策略，从加载到运行时的优化技巧...</p>
-                        <a href="#" class="read-more">阅读更多</a>
-                    </div>
-                </article>
-            </div>
+        <section class="content-section">
+            <!-- 这里可以添加你的主要内容 -->
         </section>
     </main>
-
-    <footer>
-        <div class="social-links">
-            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://blog.csdn.net/weixin_53556864?type=blog" target="_blank"><i class="fab fa-blogger"></i></a>
-            <a href="mailto:927469347@qq.com"><i class="fas fa-envelope"></i></a>
-        </div>
-        <p>&copy; 2024 辉哥之路. All rights reserved.</p>
-    </footer>
 
     <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>

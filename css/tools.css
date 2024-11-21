@@ -1,0 +1,63 @@
+.tools-main {
+    margin-top: var(--nav-height);
+    padding: 2rem;
+    max-width: 1200px;
+    margin: var(--nav-height) auto 0;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.tool-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.tool-icon {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.tool-card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.tool-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.tool-link {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: var(--secondary-color);
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.tool-link:hover {
+    background: #2980b9;
+} 
