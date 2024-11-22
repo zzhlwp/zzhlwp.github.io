@@ -2,22 +2,26 @@
 class ThemeManager {
     constructor() {
         this.themeToggle = document.querySelector('.theme-toggle');
-        this.theme = localStorage.getItem('theme') || 'light';
+        this.theme = localStorage.getItem('theme') || 'dark';
         this.init();
     }
 
     init() {
+        // 确保初始主题正确应用
         this.applyTheme(this.theme);
         
+        // 添加点击事件监听
         if (this.themeToggle) {
             this.themeToggle.addEventListener('click', () => {
+                console.log('Theme toggle clicked'); // 调试用
                 this.toggleTheme();
             });
         }
     }
 
     toggleTheme() {
-        this.theme = this.theme === 'light' ? 'dark' : 'light';
+        this.theme = this.theme === 'dark' ? 'light' : 'dark';
+        console.log('Switching to theme:', this.theme); // 调试用
         this.applyTheme(this.theme);
     }
 
@@ -28,35 +32,29 @@ class ThemeManager {
         
         // 更新图标
         if (this.themeToggle) {
-            const moonIcon = '<i class="fas fa-moon"></i>';
-            const sunIcon = '<i class="fas fa-sun"></i>';
+            const icon = theme === 'dark' ? 
+                '<i class="fas fa-moon"></i>' : 
+                '<i class="fas fa-sun"></i>';
             
-            // 月亮图标对应亮色主题，太阳图标对应暗色主题
-            this.themeToggle.innerHTML = theme === 'light' ? moonIcon : sunIcon;
+            this.themeToggle.innerHTML = icon;
             
-            // 添加过渡动画
-            this.themeToggle.style.transition = 'transform 0.3s ease, color 0.3s ease';
-            
-            // 根据主题设置图标颜色
-            if (theme === 'light') {
-                this.themeToggle.style.color = '#FFB300'; // 金色月亮
-            } else {
-                this.themeToggle.style.color = '#FDD835'; // 明亮的黄色太阳
-            }
+            // 设置图标颜色
+            this.themeToggle.style.color = theme === 'dark' ? '#FFB300' : '#FDD835';
         }
+
+        // 添加过渡效果
+        document.body.style.transition = 'all 0.3s ease';
         
-        // 添加过渡动画
-        document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
-        document.querySelector('header').style.transition = 'background-color 0.3s ease';
-        
+        // 移除过渡效果
         setTimeout(() => {
             document.body.style.transition = '';
-            document.querySelector('header').style.transition = '';
         }, 300);
+
+        console.log('Theme applied:', theme); // 调试用
     }
 }
 
-// 当 DOM 加载完成时初始化主题管理器
+// 确保 DOM 加载完成后初始化
 document.addEventListener('DOMContentLoaded', () => {
-    new ThemeManager();
+    const themeManager = new ThemeManager();
 }); 

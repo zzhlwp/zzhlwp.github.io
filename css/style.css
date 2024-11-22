@@ -1,19 +1,21 @@
 /* 主题变量定义 */
 :root {
-    /* 亮色主题变量 */
+    /* 暗色主题变量 */
     --primary-bg: #1a1a1a;
     --primary-text: #ffffff;
-    --nav-bg: rgba(26, 26, 26, 0.95);
+    --nav-bg: rgba(17, 25, 40, 0.75);
     --nav-text: #ffffff;
     --nav-height: 40px;
+    --card-bg: rgba(17, 25, 40, 0.85);
 }
 
-/* 暗色主题变量 */
+/* 亮色主题变量 */
 [data-theme="light"] {
     --primary-bg: #ffffff;
     --primary-text: #1a1a1a;
     --nav-bg: rgba(255, 255, 255, 0.95);
     --nav-text: #1a1a1a;
+    --card-bg: rgba(255, 255, 255, 0.95);
 }
 
 /* 基础样式设置 */
@@ -37,10 +39,11 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(17, 25, 40, 0.75);
+    background: var(--nav-bg);
     backdrop-filter: blur(12px);
     z-index: 1000;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--nav-text);
 }
 
 nav {
@@ -58,7 +61,7 @@ nav {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #fff;
+    color: var(--nav-text);
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: 600;
@@ -89,7 +92,7 @@ nav {
 }
 
 .nav-links a {
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--nav-text);
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 8px;
@@ -112,6 +115,27 @@ nav {
     background: rgba(255, 255, 255, 0.15);
     color: #fff;
     font-weight: 600;
+}
+
+/* 亮色主题下的导航链接激活状态 */
+[data-theme="light"] .nav-links a.active {
+    background: rgba(0, 0, 0, 0.1);
+    color: #1a1a1a;  /* 深色文字 */
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 亮色主题下的导航链接悬浮效果 */
+[data-theme="light"] .nav-links a:hover {
+    color: #1a1a1a;
+    background: rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 亮色主题下的导航链接基础样式 */
+[data-theme="light"] .nav-links a {
+    color: #1a1a1a;
 }
 
 /* 右侧功能区优化 */
@@ -163,7 +187,7 @@ nav {
 }
 
 .social-links a {
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--nav-text);
     font-size: 1.1rem;
     transition: all 0.3s ease;
     padding: 0.6rem;
@@ -194,7 +218,7 @@ nav {
 footer {
     position: relative;
     width: 100%;
-    background: rgba(17, 25, 40, 0.85);
+    background: var(--card-bg);
     backdrop-filter: blur(12px);
     padding: 4px 0;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
@@ -205,7 +229,7 @@ footer {
 .footer-content {
     text-align: center;
     font-size: 0.75em;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--nav-text);
     padding: 0;
     width: 100%;
     line-height: 1.2;
