@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简历访问验证 - 辉哥之路</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .auth-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .auth-form {
+            margin-top: 2rem;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #eee;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .auth-input:focus {
+            border-color: #3a7b6c;
+            outline: none;
+        }
+
+        .auth-button {
+            background: #3a7b6c;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .auth-button:hover {
+            background: #2c5d52;
+        }
+
+        .error-message {
+            color: #ff4444;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .security-question {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .attempts-left {
+            color: #666;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <div class="auth-container">
+        <h2>简历访问验证</h2>
+        <div class="auth-form" id="passwordForm">
+            <input type="password" id="password" class="auth-input" placeholder="请输入访问密码">
+            <p class="attempts-left">剩余尝试次数：<span id="attemptsCount">3</span></p>
+            <button onclick="verifyPassword()" class="auth-button">验证</button>
+            <p id="errorMessage" class="error-message">密码错误，请重试</p>
+        </div>
+
+        <div class="security-question" id="securityQuestion">
+            <h3>安全验证</h3>
+            <p>请输入我的生日（格式：YYYYMMDD）</p>
+            <input type="text" id="birthday" class="auth-input" placeholder="例如：20000101">
+            <button onclick="verifySecurityQuestion()" class="auth-button">验证</button>
+            <p id="securityError" class="error-message">答案错误，请重试</p>
+        </div>
+    </div>
+
+    <script>
+        // 使用更复杂的加密方式
+        const salt = CryptoJS.lib.WordArray.random(128/8);
+        const initialPasswordHash = CryptoJS.SHA256('2023010621229' + salt).toString();
+        const securityPasswordHash = CryptoJS.SHA256('20010913' + salt).toString();
+        
+        let attempts = 3;
+        let securityAttempts = parseInt(localStorage.getItem('securityAttempts') || '0');
+        let isBlocked = localStorage.getItem('isBlocked') === 'true';
+        let lastAttemptTime = parseInt(localStorage.getItem('lastAttemptTime') || '0');
+
+        // 添加时间限制，防止暴力破解
+        const ATTEMPT_INTERVAL = 2000; // 两次尝试之间至少间隔2秒
+
+        // 检查IP和设备信息（基本防护）
+        function getDeviceFingerprint() {
+            return CryptoJS.SHA256(
+                navigator.userAgent +
+                screen.width +
+                screen.height +
+                navigator.language
+            ).toString();
+        }
+
+        // 检查是否被永久禁止访问
+        if (isBlocked) {
+            const fingerprint = getDeviceFingerprint();
+            localStorage.setItem('blockedDevice', fingerprint);
+            alert('您已被永久禁止访问此页面');
+            window.location.href = 'index.html';
+        }
+
+        // 检查设备是否被封禁
+        if (localStorage.getItem('blockedDevice') === getDeviceFingerprint()) {
+            window.location.href = 'index.html';
+        }
+
+        function updateAttemptsDisplay() {
+            document.getElementById('attemptsCount').textContent = attempts;
+        }
+
+        function verifyPassword() {
+            // 检查尝试间隔
+            const now = Date.now();
+            if (now - lastAttemptTime < ATTEMPT_INTERVAL) {
+                alert('请稍后再试');
+                return;
+            }
+            lastAttemptTime = now;
+            localStorage.setItem('lastAttemptTime', now);
+
+            const password = document.getElementById('password').value;
+            const hashedInput = CryptoJS.SHA256(password + salt).toString();
+            
+            if (hashedInput === initialPasswordHash) {
+                const token = CryptoJS.lib.WordArray.random(32).toString();
+                const expireTime = Date.now() + (24 * 60 * 60 * 1000);
+                
+                // 使用加密存储验证信息
+                const authData = CryptoJS.AES.encrypt(
+                    JSON.stringify({token, expireTime}),
+                    password
+                ).toString();
+                
+                localStorage.setItem('resumeAuth', authData);
+                window.location.href = 'resume.html';
+            } else {
+                attempts--;
+                handleFailedAttempt('password');
+            }
+        }
+
+        function verifySecurityQuestion() {
+            const birthday = document.getElementById('birthday').value;
+            const hashedInput = CryptoJS.SHA256(birthday + salt).toString();
+            
+            if (hashedInput === securityPasswordHash) {
+                document.getElementById('securityQuestion').style.display = 'none';
+                document.getElementById('passwordForm').style.display = 'block';
+                attempts = 3;
+                updateAttemptsDisplay();
+                alert('安全验证通过，请重新输入访问密码');
+            } else {
+                securityAttempts++;
+                handleFailedAttempt('security');
+            }
+        }
+
+        function handleFailedAttempt(type) {
+            if (type === 'password') {
+                updateAttemptsDisplay();
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('password').value = '';
+                
+                if (attempts <= 0) {
+                    document.getElementById('passwordForm').style.display = 'none';
+                    document.getElementById('securityQuestion').style.display = 'block';
+                }
+            } else if (type === 'security') {
+                localStorage.setItem('securityAttempts', securityAttempts);
+                document.getElementById('securityError').style.display = 'block';
+                document.getElementById('birthday').value = '';
+                
+                if (securityAttempts >= 3) {
+                    const fingerprint = getDeviceFingerprint();
+                    localStorage.setItem('blockedDevice', fingerprint);
+                    localStorage.setItem('isBlocked', 'true');
+                    alert('您已被永久禁止访问此页面');
+                    window.location.href = 'index.html';
+                } else {
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                }
+            }
+        }
+
+        // 添加防调试代码
+        setInterval(() => {
+            if (window.outerHeight - window.innerHeight > 200 || 
+                window.outerWidth - window.innerWidth > 200) {
+                localStorage.setItem('isBlocked', 'true');
+                window.location.href = 'index.html';
+            }
+        }, 1000);
+
+        // 页面加载时检查状态
+        window.onload = function() {
+            if (localStorage.getItem('needsSecurityVerification') === 'true') {
+                document.getElementById('passwordForm').style.display = 'none';
+                document.getElementById('securityQuestion').style.display = 'block';
+            }
+            updateAttemptsDisplay();
+        }
+
+        // 添加回车键支持
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verifyPassword();
+            }
+        });
+
+        document.getElementById('birthday').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verifySecurityQuestion();
+            }
+        });
+    </script>
+</body>
+</html> 

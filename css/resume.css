@@ -1,0 +1,180 @@
+/* 简历整体样式 */
+.resume-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f5f9f6;  /* 浅绿色背景，匹配PDF */
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+/* 标题样式 */
+.resume-title {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3a7b6c;
+}
+
+/* 各部分标题样式 */
+section h2 {
+    background-color: #3a7b6c;  /* 深绿色背景 */
+    color: white;
+    font-size: 18px;
+    padding: 8px 15px;
+    margin: 20px 0 15px;
+    border-radius: 5px;
+    position: relative;
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, #c5a47e, #8b6b4a);  /* 金色渐变，匹配PDF */
+}
+
+/* 基本信息样式 */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 15px;
+    background: white;
+    border-radius: 5px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+}
+
+.label {
+    min-width: 60px;
+    font-weight: bold;
+    color: #333;
+}
+
+.value {
+    color: #444;
+}
+
+/* 教育背景样式 */
+.edu-item {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.time {
+    color: #666;
+    font-weight: 500;
+}
+
+/* 实习经历样式 */
+.exp-item {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.exp-header {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.exp-header span {
+    margin-right: 15px;
+    color: #444;
+}
+
+.exp-content {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.exp-content li {
+    position: relative;
+    margin-bottom: 8px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.exp-content li::before {
+    content: "•";
+    position: absolute;
+    left: -15px;
+    color: #3a7b6c;
+}
+
+/* 专业技能样式 */
+.skills ul {
+    list-style: none;
+    padding: 0 15px;
+}
+
+.skills li {
+    position: relative;
+    padding: 8px 0 8px 15px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.skills li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #3a7b6c;
+}
+
+/* 项目经历样式 */
+.project-item {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.project-header {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.project-header .time {
+    color: #666;
+    margin-right: 15px;
+}
+
+.project-header .project-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.project-content ul {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.project-content li {
+    position: relative;
+    margin-bottom: 8px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.project-content li::before {
+    content: "•";
+    position: absolute;
+    left: -15px;
+    color: #3a7b6c;
+} 
