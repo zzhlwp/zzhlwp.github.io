@@ -118,7 +118,8 @@
             
             <!-- GitHub 登录按钮 -->
             <div id="github-login" class="mb-6">
-                <button id="login-button" class="bg-gray-800 text-white px-6 py-2 rounded-lg flex items-center hover:bg-gray-700 transition-colors">
+                <button onclick="handleLogin()" 
+                        class="bg-gray-800 text-white px-6 py-2 rounded-lg flex items-center hover:bg-gray-700 transition-colors">
                     <i class="fab fa-github mr-2"></i>
                     使用 GitHub 登录
                 </button>
@@ -139,14 +140,6 @@
             <!-- 留言列表 -->
             <div id="comments-list" class="space-y-6">
                 <!-- 留言将动态插入这里 -->
-            </div>
-
-            <!-- 加载更多按钮 -->
-            <div class="text-center mt-6">
-                <button id="load-more" 
-                        class="text-blue-500 hover:text-blue-600 transition-colors hidden">
-                    加载更多
-                </button>
             </div>
         </section>
     </main>
@@ -200,6 +193,77 @@
 
         // 初始化评论系统
         comments.init();
+
+        // GitHub OAuth 配置
+        const githubConfig = {
+            clientId: 'Iv23liBNxIKubKkABWji',
+            redirectUri: 'https://zzhlwp.github.io/auth/github/callback',
+            scope: 'public_repo'
+        };
+
+        // 处理登录
+        function handleLogin() {
+            try {
+                console.log('Initiating GitHub login...');
+                const authUrl = new URL('https://github.com/login/oauth/authorize');
+                authUrl.searchParams.append('client_id', githubConfig.clientId);
+                authUrl.searchParams.append('redirect_uri', githubConfig.redirectUri);
+                authUrl.searchParams.append('scope', githubConfig.scope);
+                
+                console.log('Redirecting to:', authUrl.toString());
+                window.location.href = authUrl.toString();
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('登录过程中出现错误，请重试');
+            }
+        }
+
+        // 页面加载时检查登录状态和处理回调
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检查是否有授权码
+            const code = new URLSearchParams(window.location.search).get('code');
+            if (code) {
+                console.log('Received authorization code');
+                document.getElementById('github-login').innerHTML = 
+                    '<div class="text-gray-600">正在处理登录...</div>';
+                
+                // 处理授权
+                fetch('https://github.com/login/oauth/access_token', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        client_id: githubConfig.clientId,
+                        client_secret: '0d53285e4e24d220d6bebe3c8ea629076501903b',
+                        code: code,
+                        redirect_uri: githubConfig.redirectUri
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.access_token) {
+                        localStorage.setItem('github_token', data.access_token);
+                        // 清除 URL 中的授权码并返回导航页
+                        window.location.href = '/guide.html';
+                    } else {
+                        alert('登录失败，请重试');
+                    }
+                })
+                .catch(error => {
+                    console.error('登录错误:', error);
+                    alert('登录过程中出现错误，请重试');
+                });
+            }
+
+            // 检查是否已登录
+            const token = localStorage.getItem('github_token');
+            if (token) {
+                document.getElementById('github-login').style.display = 'none';
+                document.getElementById('comment-form').classList.remove('hidden');
+            }
+        });
     </script>
 </body>
 </html> 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub 授权回调</title>
+</head>
+<body>
+    <div style="text-align: center; padding: 20px;">
+        <p>正在处理授权...</p>
+    </div>
+
+    <script>
+        const config = {
+            clientId: 'Iv23liBNxIKubKkABWji',
+            clientSecret: '*****c501903b', // 使用您的 client secret
+            redirectUri: 'https://zzhlwp.github.io/auth/github/callback'
+        };
+
+        // 获取授权码
+        const code = new URLSearchParams(window.location.search).get('code');
+        if (code) {
+            // 处理授权
+            fetch('https://github.com/login/oauth/access_token', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    client_id: config.clientId,
+                    client_secret: config.clientSecret,
+                    code: code,
+                    redirect_uri: config.redirectUri
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.access_token) {
+                    // 存储 token
+                    localStorage.setItem('github_token', data.access_token);
+                    // 重定向回导航页
+                    window.location.href = '/guide.html';
+                } else {
+                    throw new Error('获取访问令牌失败');
+                }
+            })
+            .catch(error => {
+                console.error('授权错误:', error);
+                document.body.innerHTML = `
+                    <div style="text-align: center; padding: 20px;">
+                        <p>授权失败：${error.message}</p>
+                        <a href="/guide.html">返回首页</a>
+                    </div>
+                `;
+            });
+        } else {
+            window.location.href = '/guide.html';
+        }
+    </script>
+</body>
+</html> 
