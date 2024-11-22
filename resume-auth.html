@@ -91,8 +91,14 @@
     <script>
         // 使用更复杂的加密方式
         const salt = CryptoJS.lib.WordArray.random(128/8);
-        const initialPasswordHash = CryptoJS.SHA256('2023010621229' + salt).toString();
-        const securityPasswordHash = CryptoJS.SHA256('20010913' + salt).toString();
+        const initialPasswordHash = CryptoJS.PBKDF2('2023010621229', salt, {
+            keySize: 256/32,
+            iterations: 10000
+        }).toString();
+        const securityPasswordHash = CryptoJS.PBKDF2('20010913', salt, {
+            keySize: 256/32,
+            iterations: 10000
+        }).toString();
         
         let attempts = 3;
         let securityAttempts = parseInt(localStorage.getItem('securityAttempts') || '0');
@@ -129,6 +135,15 @@
             document.getElementById('attemptsCount').textContent = attempts;
         }
 
+        // 改为使用 PBKDF2 进行密码哈希
+        function hashPassword(password, salt) {
+            return CryptoJS.PBKDF2(password, salt, {
+                keySize: 256/32,
+                iterations: 10000
+            }).toString();
+        }
+
+        // 在 verifyPassword 函数中修改验证逻辑
         function verifyPassword() {
             // 检查尝试间隔
             const now = Date.now();
@@ -140,19 +155,32 @@
             localStorage.setItem('lastAttemptTime', now);
 
             const password = document.getElementById('password').value;
-            const hashedInput = CryptoJS.SHA256(password + salt).toString();
+            const hashedInput = CryptoJS.PBKDF2(password, salt, {
+                keySize: 256/32,
+                iterations: 10000
+            }).toString();
             
             if (hashedInput === initialPasswordHash) {
-                const token = CryptoJS.lib.WordArray.random(32).toString();
-                const expireTime = Date.now() + (24 * 60 * 60 * 1000);
+                // 生成更安全的会话令牌
+                const token = CryptoJS.lib.WordArray.random(64).toString();
+                const expireTime = Date.now() + (2 * 60 * 60 * 1000); // 2小时过期
                 
-                // 使用加密存储验证信息
+                // 添加额外的会话信息
+                const sessionData = {
+                    token,
+                    expireTime,
+                    fingerprint: getDeviceFingerprint(),
+                    createdAt: Date.now()
+                };
+                
+                // 使用固定密钥加密存储验证信息
                 const authData = CryptoJS.AES.encrypt(
-                    JSON.stringify({token, expireTime}),
-                    password
+                    JSON.stringify(sessionData),
+                    'resumeAuthKey'  // 使用固定的密钥
                 ).toString();
                 
                 localStorage.setItem('resumeAuth', authData);
+                sessionStorage.setItem('sessionValid', 'true');
                 window.location.href = 'resume.html';
             } else {
                 attempts--;
@@ -162,7 +190,10 @@
 
         function verifySecurityQuestion() {
             const birthday = document.getElementById('birthday').value;
-            const hashedInput = CryptoJS.SHA256(birthday + salt).toString();
+            const hashedInput = CryptoJS.PBKDF2(birthday, salt, {
+                keySize: 256/32,
+                iterations: 10000
+            }).toString();
             
             if (hashedInput === securityPasswordHash) {
                 document.getElementById('securityQuestion').style.display = 'none';

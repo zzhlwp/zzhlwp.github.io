@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人简历 - 辉哥之路</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/resume.css">
 </head>
@@ -130,7 +133,7 @@
                             <li>参与客户需求沟通，记录客户的设计要求和偏好，为设计方案提供创意支持。</li>
                             <li>使用 AutoCAD、SketchUp、3D Max 等设计软件绘制平面图、立面图和三维模型。</li>
                             <li>协助现场测量和调研，记录现有空间的尺寸和特点。</li>
-                            <li>学习和理解最新的设计趋势和市场需求，��与团队的设计讨论和头脑风暴。</li>
+                            <li>学习和理解最新的设计趋势和市场需求，团队的设计讨论和头脑风暴。</li>
                             <li>整理项目文档，维护设计文件和资料的有序管理。</li>
                         </ul>
                     </div>
@@ -156,7 +159,7 @@
             <section class="skills">
                 <h2>专业技能</h2>
                 <ul>
-                    <li>了解常用Linux命令，使用CentOS等主流操作系统进行开发;</li>
+                    <li>了解常用Linux命令，使用CentOS等主流操作系统开发;</li>
                     <li>熟练使用Git代码仓库工具，Maven包管理工具，Postman请求响应json工具，Swagger接口ui文档;</li>
                     <li>熟悉 Docker 容器化部署微服务,基本操作命令，pull 拉取中间件进行搭建使用;</li>
                     <li>熟悉 SpringCloud 理解分布式微服务基本理论，了解使用微服务组件 Nacos、Getway、Fegin；</li>
@@ -185,7 +188,7 @@
                         <ul>
                             <li>负责项目中后端业务设计与开发，数据库设计。</li>
                             <li>通过阿里云 OSS 技术实现文件上传下载以及云存储功能。</li>
-                            <li>使用 Docker 容器化技术进行项目前后端及中间件服务的多机混合部署，避免单点故障。</li>
+                            <li>使用 Docker 容器化技术进行项目前后端及中间件服务的多机混部署，避免单点故障。</li>
                             <li>使用 WebSocket，使客户端和服务器之间的数据交换更加简单，用于项目实现来单、催单功能。</li>
                             <li>使用 POI，封装了对 Excel 表格的常用操作，用于餐厅数据的导出。</li>
                             <li>使用 Swagger，自动的帮助开发人员生成接口文档，并对接口进行测试。</li>
@@ -204,7 +207,7 @@
                         <p>舒享代驾项目是一个面向广大乘客与司机的代驾服务平台，项目基于 B2B2C 的业务模式，包括门户、订单管理、位置采集、司机管理、乘客管理、优惠统计、支付管理 7 大模块。</p>
                         <h4>我的职责：</h4>
                         <ul>
-                            <li>负责乘客模块的设计与开发，使用 Redis 缓存用户信息，��轻数据库压力，GEO 搜集附近接单司机推送订单消息。</li>
+                            <li>负责乘客模块的设计与开发，使用 Redis 缓存用户信息，轻数据库压力，GEO 搜集附近接单司机推送订单消息。</li>
                             <li>使用 CompletableFuture 与线程池实现任务的并行处理，使用 XXL-Job 任务调度实现订单服务定时推送。</li>
                             <li>负责司机管理模块的开发，通过 MongoDB 实时上传位置，并实现司乘同显，将录音、对话文本等媒体资源上传到 MiIO 分布式文件系统，实现大文件断点续传。</li>
                             <li>使用 RabbitMQ 进行异步处理，提升支付效率，同时实现订单超时取消功能并基于 Redisson 实现第二种订单超时取消。</li>
@@ -219,7 +222,7 @@
             <section class="honors">
                 <h2>获得荣誉</h2>
                 <ul>
-                    <li>互联网+河南赛区一等奖</li>
+                    <li>互联网+南赛区一等奖</li>
                     <li>优秀班干部</li>
                     <li>优秀团干部</li>
                     <li>优秀个人</li>
@@ -246,46 +249,55 @@
     <!-- 在 <body> 标签后立即添加以下脚本 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script>
-        // 高级安全验证检查
+        // 添加设备指纹函数
+        function getDeviceFingerprint() {
+            return CryptoJS.SHA256(
+                navigator.userAgent +
+                screen.width +
+                screen.height +
+                navigator.language
+            ).toString();
+        }
+
+        // 修改 checkAuth 函数
         function checkAuth() {
             try {
-                // 检查设备封禁状态
-                const fingerprint = CryptoJS.SHA256(
-                    navigator.userAgent +
-                    screen.width +
-                    screen.height +
-                    navigator.language
-                ).toString();
-                
-                if (localStorage.getItem('blockedDevice') === fingerprint) {
-                    throw new Error('设备已被封禁');
-                }
-
                 const authData = localStorage.getItem('resumeAuth');
-                if (!authData) {
+                if (!authData || !sessionStorage.getItem('sessionValid')) {
                     throw new Error('未经授权的访问');
                 }
 
-                // 验证会话完整性
-                const sessionToken = sessionStorage.getItem('sessionToken');
-                if (!sessionToken || sessionToken !== localStorage.getItem('validSession')) {
-                    throw new Error('会话已失效');
-                }
+                // 解密会话数据
+                try {
+                    const decrypted = CryptoJS.AES.decrypt(authData, 'resumeAuthKey');
+                    const sessionData = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
 
-                // 检查页面加载方式
-                if (document.referrer === '') {
-                    throw new Error('非法访问方式');
-                }
+                    // 添加更严格的时间检查
+                    const now = Date.now();
+                    if (now > sessionData.expireTime) {
+                        throw new Error('会话已过期');
+                    }
 
-                // 防止页面被嵌入iframe
-                if (window.self !== window.top) {
-                    throw new Error('页面不能被嵌入框架');
-                }
+                    // 验证设备指纹
+                    const currentFingerprint = getDeviceFingerprint();
+                    if (sessionData.fingerprint !== currentFingerprint) {
+                        console.log('Fingerprint mismatch:', {
+                            stored: sessionData.fingerprint,
+                            current: currentFingerprint
+                        });
+                        throw new Error('设备验证失败');
+                    }
 
-                return true;
+                    return true;
+                } catch (e) {
+                    console.error('Session validation error:', e);
+                    throw new Error('会话数据无效');
+                }
             } catch (error) {
                 console.error('访问被拒绝:', error.message);
-                window.location.href = 'index.html';
+                sessionStorage.clear();
+                localStorage.removeItem('resumeAuth');
+                window.location.href = 'resume-auth.html';
                 return false;
             }
         }
@@ -321,28 +333,32 @@
             // 防止页面内容被选中
             document.addEventListener('selectstart', e => e.preventDefault());
 
-            // 添加页面可见性检查
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    sessionStorage.clear();
-                    window.location.reload();
-                }
-            });
+            // 添加防止XSS的措施
+            const sanitizeHTML = (str) => {
+                const temp = document.createElement('div');
+                temp.textContent = str;
+                return temp.innerHTML;
+            };
+
+            // 添加定期令牌刷新
+            setInterval(() => {
+                const newToken = CryptoJS.lib.WordArray.random(64).toString();
+                sessionStorage.setItem('sessionToken', newToken);
+            }, 300000); // 每5分钟
         }
 
-        // 初始化安全检查
-        if (!checkAuth()) {
-            window.location.href = 'resume-auth.html';
-        } else {
-            setupSecurityMeasures();
-            
-            // 定期检查验证状态
-            setInterval(checkAuth, 30000);
-            
-            // 生成新的会话令牌
-            const newSessionToken = CryptoJS.lib.WordArray.random(32).toString();
-            sessionStorage.setItem('sessionToken', newSessionToken);
-            localStorage.setItem('validSession', newSessionToken);
+        // 初始化时立即执行一次检查
+        window.onload = function() {
+            if (!checkAuth()) {
+                window.location.href = 'resume-auth.html';
+            } else {
+                setupSecurityMeasures();
+                
+                // 生成新的会话令牌
+                const newSessionToken = CryptoJS.lib.WordArray.random(32).toString();
+                sessionStorage.setItem('sessionToken', newSessionToken);
+                localStorage.setItem('validSession', newSessionToken);
+            }
         }
     </script>
 </body>
