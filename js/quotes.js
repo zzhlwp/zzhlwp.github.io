@@ -1,35 +1,35 @@
 const quotes = [
     {
         text: "Driven by dreams, not by profit ✨",
-        description: "用代码改变世界"
+        description: "用代码改变世界 ✨"
     },
     {
-        text: "Stay hungry, stay foolish",
-        description: "保持饥饿，保持愚蠢"
+        text: "Stay hungry, stay foolish ✨",
+        description: "保持饥饿，保持愚蠢 ✨"
     },
     {
         text: "Code is poetry ✨",
-        description: "代码如诗"
+        description: "代码如诗 ✨"
     },
     {
-        text: "Think different",
-        description: "不同凡响"
+        text: "Think different ✨",
+        description: "不同凡响 ✨"
     },
     {
-        text: "Make something wonderful",
-        description: "创造精彩"
+        text: "Make something wonderful ✨",
+        description: "创造精彩 ✨"
     },
     {
-        text: "Innovation distinguishes between a leader and a follower",
-        description: "创新区分领导者和跟随者"
+        text: "Innovation distinguishes between a leader and a follower ✨",
+        description: "创新区分领导者和跟随者 ✨"
     },
     {
-        text: "The best way to predict the future is to create it",
-        description: "创造未来的最好方式就是创造它"
+        text: "The best way to predict the future is to create it ✨",
+        description: "创造未来的最好方式就是创造它 ✨"
     },
     {
-        text: "Code never lies, comments sometimes do",
-        description: "代码从不说谎，注释偶尔会"
+        text: "Code never lies, comments sometimes do ✨",
+        description: "代码从不说谎，注释偶尔会 ✨"
     }
 ];
 
