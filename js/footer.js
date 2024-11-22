@@ -1,8 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const footer = document.querySelector('footer');
-    const pageContainer = document.querySelector('.page-container');
-
-    // 访问计数功能
+    // 访问统计功能
     function updateVisitCount() {
         let localVisits = parseInt(localStorage.getItem('visitCount') || '0');
         let totalVisits = parseInt(localStorage.getItem('totalVisits') || '0');
@@ -23,25 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // 鼠标移入移出事件
-    pageContainer.addEventListener('mousemove', (e) => {
-        // 获取鼠标距离底部的距离
-        const distanceFromBottom = window.innerHeight - e.clientY;
-        
-        // 当鼠标距离底部50px以内时显示页脚
-        if (distanceFromBottom <= 50) {
-            footer.classList.add('visible');
-        } else {
-            footer.classList.remove('visible');
-        }
-    });
-
-    // 鼠标离开页面时隐藏页脚
-    pageContainer.addEventListener('mouseleave', () => {
-        footer.classList.remove('visible');
-    });
-
-    // 修改运行时间计算
+    // 运行时间计算
     function updateRuntime() {
         const startTime = new Date('2024-11-21').getTime();
         const currentTime = new Date().getTime();
