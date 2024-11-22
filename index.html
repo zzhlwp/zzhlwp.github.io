@@ -68,7 +68,7 @@
 <body>
     <div id="vanta-birds"></div>
     <div id="particles-js"></div>
-    
+
     <div class="page-container">
         <header>
             <nav>
@@ -88,7 +88,7 @@
                     <li><a href="frontend.html">前端</a></li>
                     <li><a href="backend.html">后端</a></li>
                     <li><a href="guide.html">程序员导航指南</a></li>
-                </ul>·
+                </ul>
                 <div class="nav-right">
                     <button class="theme-toggle" aria-label="切换主题">
                         <i class="fas fa-moon"></i>
@@ -150,6 +150,26 @@
     <script src="js/mobile.js" defer></script>
     <script src="js/particles.js" defer></script>
     <script src="js/footer.js" defer></script>
+
+    <script>
+        // 检查是否被封禁
+        if (localStorage.getItem('isBlocked') === 'true') {
+            const blockedLinks = document.querySelectorAll('a[href="resume.html"], a[href="resume-auth.html"]');
+            blockedLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert('您已被禁止访问简历页面');
+                });
+                link.style.opacity = '0.5';
+                link.style.cursor = 'not-allowed';
+            });
+        }
+
+        // 防止直接访问简历页面
+        document.querySelectorAll('a[href="resume.html"]').forEach(link => {
+            link.href = 'resume-auth.html';
+        });
+    </script>
 
 </body>
 </html>

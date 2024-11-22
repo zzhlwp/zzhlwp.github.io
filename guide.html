@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>程序员导航指南 - 辉哥之路</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/guide.css">
+    <!-- 添加 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 添加动画库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- 添加图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="js/auth.js"></script>
+    <script src="js/comments.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- 导航栏 -->
+    <header>
+        <nav>
+            <!-- 保持原有导航栏内容 -->
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- 顶部横幅 -->
+        <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow-lg p-8 mb-8 text-white animate__animated animate__fadeIn">
+            <h1 class="text-4xl font-bold mb-4">程序员导航指南</h1>
+            <p class="text-xl">精选优质资源，助力编程学习</p>
+        </div>
+
+        <!-- 资源卡片网格 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- 学习路线 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow animate__animated animate__fadeInUp">
+                <div class="text-3xl text-blue-500 mb-4">
+                    <i class="fas fa-road"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-4">学习路线</h2>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-700 hover:text-blue-500 transition-colors">前端开发路线</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-blue-500 transition-colors">后端开发路线</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-blue-500 transition-colors">全栈开发路线</a></li>
+                </ul>
+            </div>
+
+            <!-- 开发工具 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow animate__animated animate__fadeInUp">
+                <div class="text-3xl text-green-500 mb-4">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-4">开发工具</h2>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-700 hover:text-green-500 transition-colors">IDE 推荐</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-green-500 transition-colors">开发环境配置</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-green-500 transition-colors">效率工具推荐</a></li>
+                </ul>
+            </div>
+
+            <!-- 技术社区 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow animate__animated animate__fadeInUp">
+                <div class="text-3xl text-purple-500 mb-4">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-4">技术社区</h2>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-700 hover:text-purple-500 transition-colors">GitHub</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-purple-500 transition-colors">Stack Overflow</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-purple-500 transition-colors">掘金</a></li>
+                </ul>
+            </div>
+
+            <!-- 学习资源 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow animate__animated animate__fadeInUp">
+                <div class="text-3xl text-red-500 mb-4">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-4">学习资源</h2>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-700 hover:text-red-500 transition-colors">在线课程平台</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-red-500 transition-colors">技术博客推荐</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-red-500 transition-colors">开源项目推荐</a></li>
+                </ul>
+            </div>
+
+            <!-- 面试准备 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow animate__animated animate__fadeInUp">
+                <div class="text-3xl text-yellow-500 mb-4">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-4">面试准备</h2>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-700 hover:text-yellow-500 transition-colors">面试题集锦</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-yellow-500 transition-colors">简历编写指南</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-yellow-500 transition-colors">面试技巧分享</a></li>
+                </ul>
+            </div>
+
+            <!-- 技术趋势 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow animate__animated animate__fadeInUp">
+                <div class="text-3xl text-indigo-500 mb-4">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-4">技术趋势</h2>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-700 hover:text-indigo-500 transition-colors">前沿技术动态</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-indigo-500 transition-colors">行业发展趋势</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-indigo-500 transition-colors">技术选型参考</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 留言板部分 -->
+        <section class="mt-12 bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-3xl font-bold mb-6 text-gray-800">留言板</h2>
+            
+            <!-- GitHub 登录按钮 -->
+            <div id="github-login" class="mb-6">
+                <button id="login-button" class="bg-gray-800 text-white px-6 py-2 rounded-lg flex items-center hover:bg-gray-700 transition-colors">
+                    <i class="fab fa-github mr-2"></i>
+                    使用 GitHub 登录
+                </button>
+            </div>
+
+            <!-- 留言表单 -->
+            <div id="comment-form" class="mb-8 hidden">
+                <textarea id="comment-content" 
+                          class="w-full p-4 border rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="写下你的想法..."
+                          rows="4"></textarea>
+                <button id="submit-comment" 
+                        class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                    发表留言
+                </button>
+            </div>
+
+            <!-- 留言列表 -->
+            <div id="comments-list" class="space-y-6">
+                <!-- 留言将动态插入这里 -->
+            </div>
+
+            <!-- 加载更多按钮 -->
+            <div class="text-center mt-6">
+                <button id="load-more" 
+                        class="text-blue-500 hover:text-blue-600 transition-colors hidden">
+                    加载更多
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition-colors hidden">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // 返回顶部按钮逻辑
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.remove('hidden');
+            } else {
+                backToTop.classList.add('hidden');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 添加页面加载动画
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.animate__fadeInUp');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+
+        const auth = new GitHubAuth();
+        const comments = new CommentSystem();
+
+        // 检查是否是GitHub回调
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        
+        if (code) {
+            auth.handleCallback(code).then(success => {
+                if (success) {
+                    window.location.href = window.location.origin + window.location.pathname;
+                }
+            });
+        }
+
+        // 初始化评论系统
+        comments.init();
+    </script>
+</body>
+</html> 

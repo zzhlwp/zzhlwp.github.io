@@ -1,0 +1,46 @@
+/* 自定义样式补充 */
+.container {
+    max-width: 1200px;
+}
+
+/* 卡片悬停效果 */
+.hover\:shadow-xl:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+}
+
+/* 链接动画 */
+a {
+    position: relative;
+    text-decoration: none;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .grid {
+        gap: 1rem;
+    }
+} 
