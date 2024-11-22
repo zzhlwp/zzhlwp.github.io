@@ -161,26 +161,27 @@
             }).toString();
             
             if (hashedInput === initialPasswordHash) {
-                // 生成更安全的会话令牌
-                const token = CryptoJS.lib.WordArray.random(64).toString();
-                const expireTime = Date.now() + (2 * 60 * 60 * 1000); // 2小时过期
-                
-                // 添加额外的会话信息
+                // 生成会话数据
                 const sessionData = {
-                    token,
-                    expireTime,
+                    token: CryptoJS.lib.WordArray.random(64).toString(),
+                    expireTime: Date.now() + (2 * 60 * 60 * 1000), // 2小时过期
                     fingerprint: getDeviceFingerprint(),
                     createdAt: Date.now()
                 };
                 
-                // 使用固定密钥加密存储验证信息
+                // 使用 AES 加密存储验证信息
                 const authData = CryptoJS.AES.encrypt(
                     JSON.stringify(sessionData),
-                    'resumeAuthKey'  // 使用固定的密钥
+                    'resumeAuthKey'
                 ).toString();
                 
+                // 存储到 localStorage 和 sessionStorage
                 localStorage.setItem('resumeAuth', authData);
                 sessionStorage.setItem('sessionValid', 'true');
+                
+                // 添加会话 cookie
+                document.cookie = `resumeSession=true; path=/; max-age=${2 * 60 * 60}`; // 2小时过期
+                
                 window.location.href = 'resume.html';
             } else {
                 attempts--;
@@ -245,8 +246,40 @@
             }
         }, 1000);
 
-        // 页面加载时检查状态
+        // 添加会话检查函数
+        function checkSession() {
+            try {
+                // 检查 sessionStorage
+                if (sessionStorage.getItem('sessionValid') === 'true') {
+                    // 检查 localStorage 中的会话数据
+                    const authData = localStorage.getItem('resumeAuth');
+                    if (authData) {
+                        const decrypted = CryptoJS.AES.decrypt(authData, 'resumeAuthKey');
+                        const sessionData = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
+                        
+                        // 验证会话是否过期
+                        if (Date.now() < sessionData.expireTime) {
+                            // 验证设备指纹
+                            if (sessionData.fingerprint === getDeviceFingerprint()) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                return false;
+            } catch (error) {
+                console.error('Session validation error:', error);
+                return false;
+            }
+        }
+
+        // 页面加载时检查会话
         window.onload = function() {
+            // 如果已有有效会话，直接跳转到简历页面
+            if (checkSession()) {
+                window.location.href = 'resume.html';
+            }
+            
             if (localStorage.getItem('needsSecurityVerification') === 'true') {
                 document.getElementById('passwordForm').style.display = 'none';
                 document.getElementById('securityQuestion').style.display = 'block';

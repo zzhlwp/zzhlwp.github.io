@@ -7,11 +7,54 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/resources.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'bilibili';
+            src: url('data:font/woff2;charset=utf-8;base64,d09GMgABAAAAAALEAAsAAAAABqwAAAJ3AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFQGVgCCcAqBCIERATYCJAMICwYABCAFhGcHMBvdBciemjwJJAUkKUEAwQ7B8f9+v9/7zL3PR5NokunzyWSCSBQS1UqHRCgkQvKG/v8d03/XNCmrkFAyDE1K5+Sx6GQ6IVNCh0oJGXqh67x0K5xbp09NQgkxCSW0xJ/+5+/9/1hneK4BWGhAd+8UUECBFNBYmxdZSQIvGHvBusCPCTRN8qCOK2tbEFZhzwLxwO0IhFU5VxlWQ1FoK0zN4g0qpfQ0fQbw2n8//qGKsEhqBnvh8mkFhL5f+32xvX/EvgEEBDiczyKxBmTiojB1KCIY5YY0TeNYBxthFX7/f0rwRf/hEUQTWN0NzECK+MkLEuB7BiTA90wQKzlmE1AuKvhvgC/GH0RuZs+7X1w827L/6vP2/Sf9V5+1X3/effl5x5kXbRcetJy933j+YeP5J63PPjz8+n3/1+/7f/zYS/n5c9/Pn3t//dr7/fveb9/2fP26B+DZ+wdtFx+2XXnUevVx67UnrdefdV571nntacfVx+2XHrReuN9y/l7T2TuNp281nLxRf/xq3bGrNYcuVR+4ULn3TEVlc/kOiPfHOmOW/wEKb/eUAH9cj0F+UMoQgF/tPxKg4Bx4YOhvZor8V1v/Rf9r0l9u7ipMzelYNYkqJ6ep0YAGDRhwENwwadJNw6Q7kCgYR1YsIlFYQqZoDSoVm9BUtBNNq6THu6YMRSQKq1gyQGh7gqTlHbK2T2QKP6HS8welth9oOoXpm1ZNhbmQcQzKUBc6g2gQZuQc6ooL1+g9JNV6UJEnxX3kOSqwXONE84QxYo/Y4z7nKYoSIoxxj+7AKOc4ZIw4h3Rdh+LxEHmeR7oW5+QcRBkGiiE9QY6BUAOhGdJxUC7xcOrz90BSWg6k8NQu+B7iclQCVmhqJ1qeYBYKe6jhXE4nRYIIA8Mw3UI7wFCcRUKMIRwH0em0IOHhcog3wEPUWi2Xyl+vM95wDTTZb0qkyFGiijpE5XEcI5XG0+JwvJCrJgAAAA==') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .fa-bilibili:before {
+            content: "\e900";
+            font-family: 'bilibili';
+        }
+    </style>
 </head>
 <body>
     <div class="page-container">
         <!-- 导航栏部分 -->
-        <header>...</header>
+        <header>
+            <nav>
+                <div class="logo">
+                    <img src="images/logo.png" alt="Logo" class="logo-img">
+                    辉哥之路
+                </div>
+                <button class="menu-toggle" aria-label="切换菜单">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">主页</a></li>
+                    <li><a href="tools.html">工具</a></li>
+                    <li><a href="resources.html" class="active">资源导航</a></li>
+                    <li><a href="resume.html">个人简历</a></li>
+                    <li><a href="algorithm.html">算法</a></li>
+                    <li><a href="frontend.html">前端</a></li>
+                    <li><a href="backend.html">后端</a></li>
+                    <li><a href="guide.html">程序员导航指南</a></li>
+                </ul>
+                <div class="nav-right">
+                    <button class="theme-toggle" aria-label="切换主题">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="social-links">
+                        <a href="https://github.com/dashboard" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://blog.csdn.net/weixin_53556864" target="_blank" title="CSDN"><i class="fab fa-blogger"></i></a>
+                        <a href="https://space.bilibili.com/496018702" target="_blank" title="哔哩哔哩"><i class="fab fa-bilibili"></i></a>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
         <main class="resources-main">
             <h1 class="page-title">资源导航</h1>
@@ -29,6 +72,10 @@
 
         <footer>...</footer>
     </div>
+    
+    <!-- 添加必要的脚本 -->
     <script src="js/theme.js"></script>
+    <script src="js/mobile.js"></script>
+    <script src="js/main.js"></script>
 </body>
-</html> 
+</html>

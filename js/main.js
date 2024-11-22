@@ -118,4 +118,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 初始化鼠标粒子效果
     initCanvas();
+
+    // 设置当前页面的导航链接为激活状态
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
 }); 

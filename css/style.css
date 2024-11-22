@@ -115,6 +115,7 @@ nav {
     background: rgba(255, 255, 255, 0.15);
     color: #fff;
     font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* 亮色主题下的导航链接激活状态 */
