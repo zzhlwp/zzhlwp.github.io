@@ -1,8 +1,44 @@
+/* 优化背景图片设置 */
+html {
+    height: 100%;
+}
+
+body {
+    background-image: url('../images/backgrounds/avengers.jpg');
+    background-size: 100% 100%;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* 优化遮罩层设置 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.25);
+    pointer-events: none;
+    z-index: -1;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+/* 保持其他样式不变 */
 .home-main {
     margin-top: var(--nav-height);
     padding: 2rem;
     max-width: 1200px;
     margin: var(--nav-height) auto 0;
+    position: relative;  /* 确保内容在背景上层 */
+    z-index: 1;
 }
 
 .profile-section {
@@ -86,4 +122,45 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-} 
+}
+
+/* 简化社交媒体链接样式 */
+.social-links {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.social-link {
+    display: inline-block;
+    padding: 5px;
+    transition: transform 0.3s ease;
+}
+
+.social-link:hover {
+    transform: scale(1.2);
+}
+
+/* B站图标样式 */
+.bilibili-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* 导航栏B站图标样式 */
+.bilibili-nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.bilibili-nav-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.bilibili-nav-link:hover .bilibili-nav-icon {
+    transform: scale(1.2);
+}
+  

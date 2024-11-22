@@ -8,11 +8,53 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+    <style>
+        /* B站图标样式 */
+        .bilibili-nav-icon {
+            width: 20px;
+            height: 20px;
+            margin-left: 8px;
+        }
+
+        /* 使用图片作为图标 */
+        .social-links a[href*="bilibili.com"] i {
+            background-image: url('https://www.bilibili.com/favicon.ico');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* CSDN图标样式 */
+        .social-links a[href*="csdn.net"] i {
+            background-image: url('https://g.csdnimg.cn/static/logo/favicon32.ico');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* 隐藏原始的 font-awesome 图标 */
+        .social-links a[href*="bilibili.com"] i:before,
+        .social-links a[href*="csdn.net"] i:before {
+            content: none;
+        }
+
+        /* 社交图标悬停效果 */
+        .social-links a:hover i {
+            transform: scale(1.2);
+            transition: transform 0.3s ease;
+        }
+    </style>
 </head>
 <body>
     <div id="vanta-birds"></div>
     <div id="particles-js"></div>
-    
+
     <div class="page-container">
         <header>
             <nav>
@@ -39,8 +81,8 @@
                     </button>
                     <div class="social-links">
                         <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://blog.csdn.net/" target="_blank"><i class="fab fa-blogger"></i></a>
-                        <a href="https://space.bilibili.com/" target="_blank"><i class="fab fa-bilibili"></i></a>
+                        <a href="https://blog.csdn.net/weixin_53556864" target="_blank"><i class="fab fa-blogger"></i></a>
+                        <a href="https://space.bilibili.com/496018702" target="_blank"><i class="fab fa-bilibili"></i></a>
                     </div>
                 </div>
             </nav>
