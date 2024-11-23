@@ -5,20 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>程序员导航指南 - 辉哥之路</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/guide.css">
-    <!-- 添加 Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 添加动画库 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <!-- 添加图标库 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="js/auth.js"></script>
-    <script src="js/comments.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+    <style>
+        /* 统一社交图标样式 */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            transition: all 0.3s ease;
+            color: #24292e;  /* GitHub的标准色 */
+        }
+
+        /* GitHub图标样式 */
+        .social-links a[href*="github.com"] i {
+            font-size: 24px;
+            color: #24292e;
+        }
+
+        /* B站图标样式 */
+        .social-links a[href*="bilibili.com"] i {
+            background-image: url('https://www.bilibili.com/favicon.ico');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+
+        /* CSDN图标样式 */
+        .social-links a[href*="csdn.net"] i {
+            background-image: url('https://g.csdnimg.cn/static/logo/favicon32.ico');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+
+        /* 隐藏原始图标 */
+        .social-links a[href*="bilibili.com"] i:before,
+        .social-links a[href*="csdn.net"] i:before {
+            content: none;
+        }
+
+        /* 统一悬停效果 */
+        .social-links a:hover {
+            transform: translateY(-2px) scale(1.1);
+            filter: brightness(1.2);
+        }
+    </style>
 </head>
-<body class="bg-gray-50">
+<body>
+    <div id="vanta-birds"></div>
+    <div id="particles-js"></div>
+
     <div class="page-container">
-        <!-- 导航栏 -->
         <header>
             <nav>
                 <div class="logo">
@@ -51,16 +102,13 @@
             </nav>
         </header>
 
-        <main class="container mx-auto px-4 py-8">
-            <!-- 顶部横幅 -->
+        <main>
             <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow-lg p-8 mb-8 text-white animate__animated animate__fadeIn">
                 <h1 class="text-4xl font-bold mb-4">程序员导航指南</h1>
                 <p class="text-xl">精选优质资源，助力编程学习</p>
             </div>
 
-            <!-- 资源卡片网格 -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- 学习路线 -->
                 <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow animate__animated animate__fadeInUp">
                     <div class="text-3xl text-blue-500 mb-4">
                         <i class="fas fa-road"></i>
@@ -73,7 +121,6 @@
                     </ul>
                 </div>
 
-                <!-- 开发工具 -->
                 <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow animate__animated animate__fadeInUp">
                     <div class="text-3xl text-green-500 mb-4">
                         <i class="fas fa-tools"></i>
@@ -86,7 +133,6 @@
                     </ul>
                 </div>
 
-                <!-- 技术社区 -->
                 <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow animate__animated animate__fadeInUp">
                     <div class="text-3xl text-purple-500 mb-4">
                         <i class="fas fa-users"></i>
@@ -99,7 +145,6 @@
                     </ul>
                 </div>
 
-                <!-- 学习资源 -->
                 <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow animate__animated animate__fadeInUp">
                     <div class="text-3xl text-red-500 mb-4">
                         <i class="fas fa-book"></i>
@@ -112,7 +157,6 @@
                     </ul>
                 </div>
 
-                <!-- 面试准备 -->
                 <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow animate__animated animate__fadeInUp">
                     <div class="text-3xl text-yellow-500 mb-4">
                         <i class="fas fa-briefcase"></i>
@@ -125,7 +169,6 @@
                     </ul>
                 </div>
 
-                <!-- 技术趋势 -->
                 <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow animate__animated animate__fadeInUp">
                     <div class="text-3xl text-indigo-500 mb-4">
                         <i class="fas fa-chart-line"></i>
@@ -139,11 +182,9 @@
                 </div>
             </div>
 
-            <!-- 留言板部分 -->
             <section class="mt-12 bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-3xl font-bold mb-6 text-gray-800">留言板</h2>
 
-                <!-- GitHub 登录按钮 -->
                 <div id="github-login" class="mb-6">
                     <button onclick="handleLogin()"
                             class="bg-gray-800 text-white px-6 py-2 rounded-lg flex items-center hover:bg-gray-700 transition-colors">
@@ -152,7 +193,6 @@
                     </button>
                 </div>
 
-                <!-- 留言表单 -->
                 <div id="comment-form" class="mb-8 hidden">
                     <textarea id="comment-content"
                               class="w-full p-4 border rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -164,7 +204,6 @@
                     </button>
                 </div>
 
-                <!-- 留言列表 -->
                 <div id="comments-list" class="space-y-6">
                     <!-- 留言将动态插入这里 -->
                 </div>
@@ -174,9 +213,11 @@
         <footer>...</footer>
     </div>
 
-    <!-- 添加必要的脚本 -->
     <script src="js/theme.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/quotes.js"></script>
     <script src="js/mobile.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/footer.js"></script>
 </body>
 </html>

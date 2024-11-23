@@ -6,24 +6,71 @@
     <title>资源导航 - 辉哥之路</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/resources.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
     <style>
-        @font-face {
-            font-family: 'bilibili';
-            src: url('data:font/woff2;charset=utf-8;base64,d09GMgABAAAAAALEAAsAAAAABqwAAAJ3AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFQGVgCCcAqBCIERATYCJAMICwYABCAFhGcHMBvdBciemjwJJAUkKUEAwQ7B8f9+v9/7zL3PR5NokunzyWSCSBQS1UqHRCgkQvKG/v8d03/XNCmrkFAyDE1K5+Sx6GQ6IVNCh0oJGXqh67x0K5xbp09NQgkxCSW0xJ/+5+/9/1hneK4BWGhAd+8UUECBFNBYmxdZSQIvGHvBusCPCTRN8qCOK2tbEFZhzwLxwO0IhFU5VxlWQ1FoK0zN4g0qpfQ0fQbw2n8//qGKsEhqBnvh8mkFhL5f+32xvX/EvgEEBDiczyKxBmTiojB1KCIY5YY0TeNYBxthFX7/f0rwRf/hEUQTWN0NzECK+MkLEuB7BiTA90wQKzlmE1AuKvhvgC/GH0RuZs+7X1w827L/6vP2/Sf9V5+1X3/effl5x5kXbRcetJy933j+YeP5J63PPjz8+n3/1+/7f/zYS/n5c9/Pn3t//dr7/fveb9/2fP26B+DZ+wdtFx+2XXnUevVx67UnrdefdV571nntacfVx+2XHrReuN9y/l7T2TuNp281nLxRf/xq3bGrNYcuVR+4ULn3TEVlc/kOiPfHOmOW/wEKb/eUAH9cj0F+UMoQgF/tPxKg4Bx4YOhvZor8V1v/Rf9r0l9u7ipMzelYNYkqJ6ep0YAGDRhwENwwadJNw6Q7kCgYR1YsIlFYQqZoDSoVm9BUtBNNq6THu6YMRSQKq1gyQGh7gqTlHbK2T2QKP6HS8welth9oOoXpm1ZNhbmQcQzKUBc6g2gQZuQc6ooL1+g9JNV6UJEnxX3kOSqwXONE84QxYo/Y4z7nKYoSIoxxj+7AKOc4ZIw4h3Rdh+LxEHmeR7oW5+QcRBkGiiE9QY6BUAOhGdJxUC7xcOrz90BSWg6k8NQu+B7iclQCVmhqJ1qeYBYKe6jhXE4nRYIIA8Mw3UI7wFCcRUKMIRwH0em0IOHhcog3wEPUWi2Xyl+vM95wDTTZb0qkyFGiijpE5XEcI5XG0+JwvJCrJgAAAA==') format('woff2');
-            font-weight: normal;
-            font-style: normal;
+        /* 统一社交图标样式 */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
 
-        .fa-bilibili:before {
-            content: "\e900";
-            font-family: 'bilibili';
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            transition: all 0.3s ease;
+            color: #24292e;
+        }
+
+        /* GitHub图标样式 */
+        .social-links a[href*="github.com"] i {
+            font-size: 24px;
+            color: #24292e;
+        }
+
+        /* B站图标样式 */
+        .social-links a[href*="bilibili.com"] i {
+            background-image: url('https://www.bilibili.com/favicon.ico');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+
+        /* CSDN图标样式 */
+        .social-links a[href*="csdn.net"] i {
+            background-image: url('https://g.csdnimg.cn/static/logo/favicon32.ico');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+
+        /* 隐藏原始图标 */
+        .social-links a[href*="bilibili.com"] i:before,
+        .social-links a[href*="csdn.net"] i:before {
+            content: none;
+        }
+
+        /* 统一悬停效果 */
+        .social-links a:hover {
+            transform: translateY(-2px) scale(1.1);
+            filter: brightness(1.2);
         }
     </style>
 </head>
 <body>
+    <div id="vanta-birds"></div>
+    <div id="particles-js"></div>
+
     <div class="page-container">
-        <!-- 导航栏部分 -->
         <header>
             <nav>
                 <div class="logo">
@@ -72,10 +119,12 @@
 
         <footer>...</footer>
     </div>
-    
-    <!-- 添加必要的脚本 -->
+
     <script src="js/theme.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/quotes.js"></script>
     <script src="js/mobile.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/footer.js"></script>
 </body>
 </html>

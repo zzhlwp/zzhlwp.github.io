@@ -9,11 +9,73 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/resume.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+    <style>
+        /* 统一社交图标样式 */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            transition: all 0.3s ease;
+            color: #24292e;
+        }
+
+        /* GitHub图标样式 */
+        .social-links a[href*="github.com"] i {
+            font-size: 24px;
+            color: #24292e;
+        }
+
+        /* B站图标样式 */
+        .social-links a[href*="bilibili.com"] i {
+            background-image: url('https://www.bilibili.com/favicon.ico');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+
+        /* CSDN图标样式 */
+        .social-links a[href*="csdn.net"] i {
+            background-image: url('https://g.csdnimg.cn/static/logo/favicon32.ico');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+
+        /* 隐藏原始图标 */
+        .social-links a[href*="bilibili.com"] i:before,
+        .social-links a[href*="csdn.net"] i:before {
+            content: none;
+        }
+
+        /* 统一悬停效果 */
+        .social-links a:hover {
+            transform: translateY(-2px) scale(1.1);
+            filter: brightness(1.2);
+        }
+    </style>
 </head>
 <body>
-    <!-- 导航栏部分 -->
-    <header>
-        <nav>
+    <div id="vanta-birds"></div>
+    <div id="particles-js"></div>
+
+    <div class="page-container">
+        <header>
+            <nav>
                 <div class="logo">
                     <img src="images/logo.png" alt="Logo" class="logo-img">
                     辉哥之路
@@ -42,330 +104,230 @@
                     </div>
                 </div>
             </nav>
-    </header>
+        </header>
 
-    <main class="resume-container">
-        <div class="resume-content">
-            <h1 class="resume-title">个人简历</h1>
+        <main class="resume-container">
+            <div class="resume-content">
+                <h1 class="resume-title">个人简历</h1>
 
-            <!-- 基本信息 -->
-            <section class="basic-info">
-                <h2>基本信息</h2>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="label">姓名</span>
-                        <span class="value">朱志辉</span>
+                <!-- 基本信息 -->
+                <section class="basic-info">
+                    <h2>基本信息</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="label">姓名</span>
+                            <span class="value">朱志辉</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">民族</span>
+                            <span class="value">汉</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">年龄</span>
+                            <span class="value">22</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">政治面貌</span>
+                            <span class="value">共青团员</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">电话</span>
+                            <span class="value">18337873016</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">邮箱</span>
+                            <span class="value">zhuzhihui3016@163.com</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">学历</span>
+                            <span class="value">本科</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">毕业院校</span>
+                            <span class="value">郑州经贸学院</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">住址</span>
+                            <span class="value">河南省郑州市</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">求职意向</span>
+                            <span class="value">Java开发工程师</span>
+                        </div>
                     </div>
-                    <div class="info-item">
-                        <span class="label">民族</span>
-                        <span class="value">汉</span>
+                </section>
+
+                <!-- 教育经历 -->
+                <section class="education">
+                    <h2>教育经历</h2>
+                    <div class="edu-item">
+                        <div class="time">2020.07-2025.06</div>
+                        <div class="school">郑州经贸学院</div>
+                        <div class="major">数字媒体技术（GPA 前 10%）本科</div>
                     </div>
-                    <div class="info-item">
-                        <span class="label">年龄</span>
-                        <span class="value">22</span>
+                </section>
+
+                <!-- 校园经历 -->
+                <section class="campus-exp">
+                    <h2>校园经历</h2>
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="time">2021.05-2023.06</span>
+                            <span class="position">互联网+创新协会 技术部（组长）</span>
+                        </div>
+                        <div class="exp-content">
+                            <h3>任职描述：</h3>
+                            <ul>
+                                <li>负责当前小组的任务分配还有技术对接；</li>
+                                <li>作为小组的负责人，负责协会的活动下发和组织编程比赛名单，组织小组参加协会的活动；</li>
+                                <li>代表技术部组长大学参加多次自组织编程大赛，并取得多项荣誉：</li>
+                                <li class="sub-item">程序编程设计"亚军"；</li>
+                                <li class="sub-item">网页设计比赛"杰出编程奖"；</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="info-item">
-                        <span class="label">政治面貌</span>
-                        <span class="value">共青团员</span>
+                    <!-- 继续添加其他校园经历... -->
+                </section>
+
+                <!-- 工作经历 -->
+                <section class="work-exp">
+                    <h2>工作经历</h2>
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="time">2022.4-2022.06</span>
+                            <span class="company">博西尼全屋定制店</span>
+                            <span class="position">室内设计师</span>
+                        </div>
+                        <div class="exp-content">
+                            <h3>工作职责：</h3>
+                            <ul>
+                                <li>协助主设计师进行室内设计项目的各个阶段，包括概念设计、方案设计和施工图设计。</li>
+                                <li>参与客户需求沟通，记录客户的设计要求和偏好，为设计方案提供创意支持。</li>
+                                <li>使用 AutoCAD、SketchUp、3D Max 等设计软件绘制平面图、立面图和三维模型。</li>
+                                <li>协助现场测量和调研，记录现有空间的尺寸和特点。</li>
+                                <li>学习和理解最新的设计趋势和市场需求，团队的设计讨论和头脑风暴。</li>
+                                <li>整理项目文档，维护设计文件和资料的有序管理。</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="info-item">
-                        <span class="label">电话</span>
-                        <span class="value">18337873016</span>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="time">2023.4-2023.09</span>
+                            <span class="company">内蒙古向导信息技术有限公司</span>
+                            <span class="position">Java 后端开发实习</span>
+                        </div>
+                        <div class="exp-content">
+                            <ul>
+                                <li>负责与前端人员进行代码对接和相应功能模块的需求分析、设计和开发工作。</li>
+                                <li>根据计划独立完成模块的代码、文档的编写和单元测试工作。</li>
+                                <li>主动了解和学习最新的相关平台技术。</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="info-item">
-                        <span class="label">邮箱</span>
-                        <span class="value">zhuzhihui3016@163.com</span>
+                </section>
+
+                <!-- 专业技能 -->
+                <section class="skills">
+                    <h2>专业技能</h2>
+                    <ul>
+                        <li>了解常用Linux命令，使用CentOS等主流操作系统开发;</li>
+                        <li>熟练使用Git代码仓库工具，Maven包管理工具，Postman请求响应json工具，Swagger接口ui文档;</li>
+                        <li>熟悉 Docker 容器化部署微服务,基本操作命令，pull 拉取中间件进行搭建使用;</li>
+                        <li>熟悉 SpringCloud 理解分布式微服务基本理论，了解使用微服务组件 Nacos、Getway、Fegin；</li>
+                        <li>悉 Spring，理解 IOC 与 AOP 思想：熟悉 SpringMVC、MyBatis、SpringBoot 等框架的使用;</li>
+                        <li>熟悉 RabbitMQ 消息队列中间件，并应用于业务逻辑中;</li>
+                        <li>熟悉 MySQL,了解 MySQL 索引结构、事务原理、MVCC 机制，能进行简单的 SQL 语句调优;</li>
+                        <li>熟悉 Redis,了解 Redis 应用于分布式锁、缓存、性能优化等场景;</li>
+                        <li>熟悉 Java 并发编程，JUC、ThreadLocal、锁，AQS 原理，线程池池化技术;</li>
+                        <li>熟悉 Java 基础知识，了解 JVM 内存模型、类加载机制、垃圾回收机制；</li>
+                    </ul>
+                </section>
+
+                <!-- 项目经历 -->
+                <section class="projects">
+                    <h2>项目经历</h2>
+                    <!-- 项目一 -->
+                    <div class="project-item">
+                        <div class="project-header">
+                            <h3>餐厅外卖系统</h3>
+                        </div>
+                        <div class="project-content">
+                            <h4>项目介绍：</h4>
+                            <p>本项目是专门为餐饮企业（餐厅、饭店）定制的一款软件产品，包括系统管理后台和小程序端应用两部分。其中系统管理后台主要提供给餐饮企业内部员工使用，可以对餐厅的分类、菜品、套餐、订单、员工等进行管理维护，对餐厅的各类数据进行统计，同时也可进行来单语音播报功能。小程序端主要提供给消费者使用，可以在线浏览菜品、添加购物车、下单、支付、催单等。</p>
+                            <p>项目地址：<a href="https://gitee.com/zzhlwp/sky-take-out" target="_blank">https://gitee.com/zzhlwp/sky-take-out</a></p>
+                            <h4>我的职责：</h4>
+                            <ul>
+                                <li>负责项目中后端业务设计与开发，数据库设计。</li>
+                                <li>通过阿里云 OSS 技术实现文件上传下载以及云存储功能。</li>
+                                <li>使用 Docker 容器化技术进行项目前后端及中间件服务的多机混部署，避免单点故障。</li>
+                                <li>使用 WebSocket，使客户端和服务器之间的数据交换更加简单，用于项目实现来单、催单功能。</li>
+                                <li>使用 POI，封装了对 Excel 表格的常用操作，用于餐厅数据的导出。</li>
+                                <li>使用 Swagger，自动的帮助开发人员生成接口文档，并对接口进行测试。</li>
+                                <li>使用 Nginx 作为 Http 服务器，部署静态资源，实现 Tomcat 的负载均衡，以及反向代理。</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="info-item">
-                        <span class="label">学历</span>
-                        <span class="value">本科</span>
+
+                    <!-- 项目二 -->
+                    <div class="project-item">
+                        <div class="project-header">
+                            <h3>舒享代驾 (2024.6-2024.8)</h3>
+                        </div>
+                        <div class="project-content">
+                            <h4>项目介绍：</h4>
+                            <p>舒享代驾项目是一个面向广大乘客与司机的代驾服务平台，项目基于 B2B2C 的业务模式，包括门户、订单管理、位置采集、司机管理、乘客管理、优惠统计、支付管理 7 大模块。</p>
+                            <h4>我的职责：</h4>
+                            <ul>
+                                <li>负责乘客模块的设计与开发，使用 Redis 缓存用户信息，轻数据库压力，GEO 搜集附近接单司机推送订单消息。</li>
+                                <li>使用 CompletableFuture 与线程池实现任务的并行处理，使用 XXL-Job 任务调度实现订单服务定时推送。</li>
+                                <li>负责司机管理模块的开发，通过 MongoDB 实时上传位置，并实现司乘同显，将录音、对话文本等媒体资源上传到 MiIO 分布式文件系统，实现大文件断点续传。</li>
+                                <li>使用 RabbitMQ 进行异步处理，提升支付效率，同时实现订单超时取消功能并基于 Redisson 实现第二种订单超时取消。</li>
+                                <li>使用 Drools 对代驾费用，系统奖励、分账进行计算，将业务决策进行解耦。</li>
+                                <li>基于 Redisson 实现分布式锁解决司机抢单的问题，使用 seate 框架，处理支付功能模块分布式事务的一致性。</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="info-item">
-                        <span class="label">毕业院校</span>
-                        <span class="value">郑州经贸学院</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">住址</span>
-                        <span class="value">河南省郑州市</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">求职意向</span>
-                        <span class="value">Java开发工程师</span>
-                    </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- 教育经历 -->
-            <section class="education">
-                <h2>教育经历</h2>
-                <div class="edu-item">
-                    <div class="time">2020.07-2025.06</div>
-                    <div class="school">郑州经贸学院</div>
-                    <div class="major">数字媒体技术（GPA 前 10%）本科</div>
-                </div>
-            </section>
+                <!-- 获得荣誉 -->
+                <section class="honors">
+                    <h2>获得荣誉</h2>
+                    <ul>
+                        <li>互联网+南赛区一等奖</li>
+                        <li>优秀班干部</li>
+                        <li>优秀团干部</li>
+                        <li>优秀个人</li>
+                        <li>优秀志愿者</li>
+                        <li>积极分子</li>
+                        <li>优秀团员</li>
+                        <li>普通话证</li>
+                    </ul>
+                </section>
 
-            <!-- 校园经历 -->
-            <section class="campus-exp">
-                <h2>校园经历</h2>
-                <div class="exp-item">
-                    <div class="exp-header">
-                        <span class="time">2021.05-2023.06</span>
-                        <span class="position">互联网+创新协会 技术部（组长）</span>
-                    </div>
-                    <div class="exp-content">
-                        <h3>任职描述：</h3>
-                        <ul>
-                            <li>负责当前小组的任务分配还有技术对接；</li>
-                            <li>作为小组的负责人，负责协会的活动下发和组织编程比赛名单，组织小组参加协会的活动；</li>
-                            <li>代表技术部组长大学参加多次自组织编程大赛，并取得多项荣誉：</li>
-                            <li class="sub-item">程序编程设计"亚军"；</li>
-                            <li class="sub-item">网页设计比赛"杰出编程奖"；</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- 继续添加其他校园经历... -->
-            </section>
+                <!-- 个人总结 -->
+                <section class="summary">
+                    <h2>个人总结</h2>
+                    <ul>
+                        <li>具有良好的沟通能力，具有团队合作精神</li>
+                        <li>喜欢 Code Review，规整自己的代码</li>
+                        <li>有代码洁癖，喜欢整洁、可维护性和可扩展性高的代码</li>
+                        <li>喜欢钻研新技术，业务逻辑分析能力、解决问题能力强</li>
+                    </ul>
+                </section>
+            </div>
+        </main>
 
-            <!-- 工作经历 -->
-            <section class="work-exp">
-                <h2>工作经历</h2>
-                <div class="exp-item">
-                    <div class="exp-header">
-                        <span class="time">2022.4-2022.06</span>
-                        <span class="company">博西尼全屋定制店</span>
-                        <span class="position">室内设计师</span>
-                    </div>
-                    <div class="exp-content">
-                        <h3>工作职责：</h3>
-                        <ul>
-                            <li>协助主设计师进行室内设计项目的各个阶段，包括概念设计、方案设计和施工图设计。</li>
-                            <li>参与客户需求沟通，记录客户的设计要求和偏好，为设计方案提供创意支持。</li>
-                            <li>使用 AutoCAD、SketchUp、3D Max 等设计软件绘制平面图、立面图和三维模型。</li>
-                            <li>协助现场测量和调研，记录现有空间的尺寸和特点。</li>
-                            <li>学习和理解最新的设计趋势和市场需求，团队的设计讨论和头脑风暴。</li>
-                            <li>整理项目文档，维护设计文件和资料的有序管理。</li>
-                        </ul>
-                    </div>
-                </div>
+        <footer>
+            <!-- 页脚内容保持不变 -->
+        </footer>
+    </div>
 
-                <div class="exp-item">
-                    <div class="exp-header">
-                        <span class="time">2023.4-2023.09</span>
-                        <span class="company">内蒙古向导信息技术有限公司</span>
-                        <span class="position">Java 后端开发实习</span>
-                    </div>
-                    <div class="exp-content">
-                        <ul>
-                            <li>负责与前端人员进行代码对接和相应功能模块的需求分析、设计和开发工作。</li>
-                            <li>根据计划独立完成模块的代码、文档的编写和单元测试工作。</li>
-                            <li>主动了解和学习最新的相关平台技术。</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 专业技能 -->
-            <section class="skills">
-                <h2>专业技能</h2>
-                <ul>
-                    <li>了解常用Linux命令，使用CentOS等主流操作系统开发;</li>
-                    <li>熟练使用Git代码仓库工具，Maven包管理工具，Postman请求响应json工具，Swagger接口ui文档;</li>
-                    <li>熟悉 Docker 容器化部署微服务,基本操作命令，pull 拉取中间件进行搭建使用;</li>
-                    <li>熟悉 SpringCloud 理解分布式微服务基本理论，了解使用微服务组件 Nacos、Getway、Fegin；</li>
-                    <li>悉 Spring，理解 IOC 与 AOP 思想：熟悉 SpringMVC、MyBatis、SpringBoot 等框架的使用;</li>
-                    <li>熟悉 RabbitMQ 消息队列中间件，并应用于业务逻辑中;</li>
-                    <li>熟悉 MySQL,了解 MySQL 索引结构、事务原理、MVCC 机制，能进行简单的 SQL 语句调优;</li>
-                    <li>熟悉 Redis,了解 Redis 应用于分布式锁、缓存、性能优化等场景;</li>
-                    <li>熟悉 Java 并发编程，JUC、ThreadLocal、锁，AQS 原理，线程池池化技术;</li>
-                    <li>熟悉 Java 基础知识，了解 JVM 内存模型、类加载机制、垃圾回收机制；</li>
-                </ul>
-            </section>
-
-            <!-- 项目经历 -->
-            <section class="projects">
-                <h2>项目经历</h2>
-                <!-- 项目一 -->
-                <div class="project-item">
-                    <div class="project-header">
-                        <h3>餐厅外卖系统</h3>
-                    </div>
-                    <div class="project-content">
-                        <h4>项目介绍：</h4>
-                        <p>本项目是专门为餐饮企业（餐厅、饭店）定制的一款软件产品，包括系统管理后台和小程序端应用两部分。其中系统管理后台主要提供给餐饮企业内部员工使用，可以对餐厅的分类、菜品、套餐、订单、员工等进行管理维护，对餐厅的各类数据进行统计，同时也可进行来单语音播报功能。小程序端主要提供给消费者使用，可以在线浏览菜品、添加购物车、下单、支付、催单等。</p>
-                        <p>项目地址：<a href="https://gitee.com/zzhlwp/sky-take-out" target="_blank">https://gitee.com/zzhlwp/sky-take-out</a></p>
-                        <h4>我的职责：</h4>
-                        <ul>
-                            <li>负责项目中后端业务设计与开发，数据库设计。</li>
-                            <li>通过阿里云 OSS 技术实现文件上传下载以及云存储功能。</li>
-                            <li>使用 Docker 容器化技术进行项目前后端及中间件服务的多机混部署，避免单点故障。</li>
-                            <li>使用 WebSocket，使客户端和服务器之间的数据交换更加简单，用于项目实现来单、催单功能。</li>
-                            <li>使用 POI，封装了对 Excel 表格的常用操作，用于餐厅数据的导出。</li>
-                            <li>使用 Swagger，自动的帮助开发人员生成接口文档，并对接口进行测试。</li>
-                            <li>使用 Nginx 作为 Http 服务器，部署静态资源，实现 Tomcat 的负载均衡，以及反向代理。</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- 项目二 -->
-                <div class="project-item">
-                    <div class="project-header">
-                        <h3>舒享代驾 (2024.6-2024.8)</h3>
-                    </div>
-                    <div class="project-content">
-                        <h4>项目介绍：</h4>
-                        <p>舒享代驾项目是一个面向广大乘客与司机的代驾服务平台，项目基于 B2B2C 的业务模式，包括门户、订单管理、位置采集、司机管理、乘客管理、优惠统计、支付管理 7 大模块。</p>
-                        <h4>我的职责：</h4>
-                        <ul>
-                            <li>负责乘客模块的设计与开发，使用 Redis 缓存用户信息，轻数据库压力，GEO 搜集附近接单司机推送订单消息。</li>
-                            <li>使用 CompletableFuture 与线程池实现任务的并行处理，使用 XXL-Job 任务调度实现订单服务定时推送。</li>
-                            <li>负责司机管理模块的开发，通过 MongoDB 实时上传位置，并实现司乘同显，将录音、对话文本等媒体资源上传到 MiIO 分布式文件系统，实现大文件断点续传。</li>
-                            <li>使用 RabbitMQ 进行异步处理，提升支付效率，同时实现订单超时取消功能并基于 Redisson 实现第二种订单超时取消。</li>
-                            <li>使用 Drools 对代驾费用，系统奖励、分账进行计算，将业务决策进行解耦。</li>
-                            <li>基于 Redisson 实现分布式锁解决司机抢单的问题，使用 seate 框架，处理支付功能模块分布式事务的一致性。</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 获得荣誉 -->
-            <section class="honors">
-                <h2>获得荣誉</h2>
-                <ul>
-                    <li>互联网+南赛区一等奖</li>
-                    <li>优秀班干部</li>
-                    <li>优秀团干部</li>
-                    <li>优秀个人</li>
-                    <li>优秀志愿者</li>
-                    <li>积极分子</li>
-                    <li>优秀团员</li>
-                    <li>普通话证</li>
-                </ul>
-            </section>
-
-            <!-- 个人总结 -->
-            <section class="summary">
-                <h2>个人总结</h2>
-                <ul>
-                    <li>具有良好的沟通能力，具有团队合作精神</li>
-                    <li>喜欢 Code Review，规整自己的代码</li>
-                    <li>有代码洁癖，喜欢整洁、可维护性和可扩展性高的代码</li>
-                    <li>喜欢钻研新技术，业务逻辑分析能力、解决问题能力强</li>
-                </ul>
-            </section>
-        </div>
-    </main>
-
-    <!-- 在 <body> 标签后立即添加以下脚本 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script>
-        // 添加设备指纹函数
-        function getDeviceFingerprint() {
-            return CryptoJS.SHA256(
-                navigator.userAgent +
-                screen.width +
-                screen.height +
-                navigator.language
-            ).toString();
-        }
-
-        // 修改 checkAuth 函数
-        function checkAuth() {
-            try {
-                // 检查 sessionStorage
-                if (sessionStorage.getItem('sessionValid') !== 'true') {
-                    throw new Error('未经授权的访问');
-                }
-
-                // 检查 localStorage 中的会话数据
-                const authData = localStorage.getItem('resumeAuth');
-                if (!authData) {
-                    throw new Error('未找到会话数据');
-                }
-
-                // 解密并验证会话数据
-                const decrypted = CryptoJS.AES.decrypt(authData, 'resumeAuthKey');
-                const sessionData = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
-
-                // 验证会话是否过期
-                if (Date.now() > sessionData.expireTime) {
-                    throw new Error('会话已过期');
-                }
-
-                // 验证设备指纹
-                if (sessionData.fingerprint !== getDeviceFingerprint()) {
-                    throw new Error('设备验证失败');
-                }
-
-                return true;
-            } catch (error) {
-                console.error('访问被拒绝:', error.message);
-                // 清除无效的会话数据
-                sessionStorage.removeItem('sessionValid');
-                localStorage.removeItem('resumeAuth');
-                window.location.href = 'resume-auth.html';
-                return false;
-            }
-        }
-
-        // 添加额外的安全措施
-        function setupSecurityMeasures() {
-            // 禁用右键菜单
-            document.addEventListener('contextmenu', e => e.preventDefault());
-
-            // 禁用F12和开发者工具快捷键
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'F12' ||
-                    (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-                    (e.ctrlKey && e.shiftKey && e.key === 'J') ||
-                    (e.ctrlKey && e.key === 'U')) {
-                    e.preventDefault();
-                    localStorage.setItem('isBlocked', 'true');
-                    window.location.href = 'index.html';
-                }
-            });
-
-            // 检测开发者工具状态
-            let devToolsCheck = setInterval(() => {
-                const widthThreshold = window.outerWidth - window.innerWidth > 160;
-                const heightThreshold = window.outerHeight - window.innerHeight > 160;
-                if (widthThreshold || heightThreshold) {
-                    localStorage.setItem('isBlocked', 'true');
-                    window.location.href = 'index.html';
-                    clearInterval(devToolsCheck);
-                }
-            }, 1000);
-
-            // 防止页面内容被选中
-            document.addEventListener('selectstart', e => e.preventDefault());
-
-            // 添加防止XSS的措施
-            const sanitizeHTML = (str) => {
-                const temp = document.createElement('div');
-                temp.textContent = str;
-                return temp.innerHTML;
-            };
-
-            // 添加定期令牌刷新
-            setInterval(() => {
-                const newToken = CryptoJS.lib.WordArray.random(64).toString();
-                sessionStorage.setItem('sessionToken', newToken);
-            }, 300000); // 每5分钟
-        }
-
-        // 初始化时立即执行一次检查
-        window.onload = function() {
-            if (!checkAuth()) {
-                window.location.href = 'resume-auth.html';
-            } else {
-                setupSecurityMeasures();
-
-                // 生成新的会话令牌
-                const newSessionToken = CryptoJS.lib.WordArray.random(32).toString();
-                sessionStorage.setItem('sessionToken', newSessionToken);
-                localStorage.setItem('validSession', newSessionToken);
-            }
-        }
-    </script>
+    <script src="js/theme.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/quotes.js"></script>
+    <script src="js/mobile.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/footer.js"></script>
 </body>
 </html>

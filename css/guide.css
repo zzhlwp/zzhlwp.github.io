@@ -43,4 +43,59 @@ a:hover::after {
     .grid {
         gap: 1rem;
     }
-} 
+}
+
+.guide-main {
+    padding-top: var(--nav-height);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* 导航栏样式 */
+nav {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0.8rem 2rem;
+}
+
+/* 社交图标样式 */
+.social-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease;
+    color: var(--nav-text);
+}
+
+/* GitHub图标样式 */
+.social-links a[href*="github.com"] i {
+    font-size: 24px;
+}
+
+/* B站图标样式 */
+.social-links a[href*="bilibili.com"] i {
+    font-family: 'bilibili';
+    font-style: normal;
+    font-size: 24px;
+}
+
+/* CSDN图标样式 */
+.social-links a[href*="csdn.net"] i {
+    font-size: 24px;
+}
+
+/* 统一悬停效果 */
+.social-links a:hover {
+    transform: translateY(-2px);
+    opacity: 0.8;
+}
+  
